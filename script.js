@@ -80,18 +80,23 @@ const playerMouth = player.querySelector('.mouth');
 let playerTop = 0;
 let playerLeft = 0;
 
+
+/* COLLISION WALLS COMPLETED*/
 setInterval(function() {
     if (downPressed == true) {
 
         let position = player.getBoundingClientRect()
         let newBottom = position.bottom +1;
-        let btmL = document.elementFromPoint(newBottom, position.left);
-        let btmR = document.elementFromPoint(newBottom, position.left);
+        let btmL = document.elementFromPoint(position.left, newBottom);
+        let btmR = document.elementFromPoint(position.right, newBottom);
 
-        if(btmL.classList.contains('wall') == false &&   btmR.classList.contains('wall') == false) {
-        playerTop++;
-        player.style.top = playerTop + 'px';
+        if (btmL.classList.contains('wall')== false && btmR.classList.contains('wall') == false) {
+            playerTop++;
+            player.style.top = playerTop + 'px';     
         }
+        
+    
+        
           playerMouth.classList='down';
     }
   
@@ -132,7 +137,7 @@ setInterval(function() {
 
     if(rightPressed == true) {
         let position = player.getBoundingClientRect()
-        let newRight = position.right -1;
+        let newRight = position.right +1;
         let topR = document.elementFromPoint(newRight, position.top)
         let btmR = document.elementFromPoint(newRight, position.bottom)
         
@@ -146,6 +151,75 @@ setInterval(function() {
     
 }, 10);
 
+
+/*  POINTS */
+
+function pointCheck() {
+    const position = player.getBoundingClientRect();
+    const points = document.querySelectorAll('.point');
+
+    for (let i = 0; i < points.length; i++) {
+        let pos = points[i].getBoundingClientRect();
+        if (
+            position.right > pos.left &&
+            position.left < pos.right &&
+            position.bottom > pos.top &&
+            position.top < pos.bottom
+
+        ) {
+            points[i].parentNode.removeChild(points[i]);
+        }
+    }
+
+   
+
+}
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* COLLISION WALLS COMPLETED */
 
 
 
@@ -161,3 +235,5 @@ let start1 = document.querySelector('#start1');
 start1.onclick = function(){
     start1.parentNode.removeChild(start1);
 }
+
+/* TITLE COMPLETED */
