@@ -83,6 +83,7 @@ let playerLeft = 0;
 
 /* COLLISION WALLS COMPLETED*/
 setInterval(function() {
+    pointCheck();
     if (downPressed == true) {
 
         let position = player.getBoundingClientRect()
@@ -94,12 +95,11 @@ setInterval(function() {
             playerTop++;
             player.style.top = playerTop + 'px';     
         }
-        
     
-        
           playerMouth.classList='down';
     }
-  
+    
+
     
     if(upPressed == true) {
 
@@ -127,13 +127,12 @@ setInterval(function() {
         let btmL = document.elementFromPoint (newLeft, position.bottom);
 
         if(topL.classList.contains('wall ') == false && btmL.classList.contains('wall') == false) {
-            playerLeft--;
-            player.style.left = playerLeft + 'px';
-
+             playerLeft--;
+            player.style.left =playerLeft + 'px'
         }
         
         playerMouth.classList = 'left';
-    }
+        }
 
     if(rightPressed == true) {
         let position = player.getBoundingClientRect()
@@ -152,7 +151,7 @@ setInterval(function() {
 }, 10);
 
 
-/*  POINTS */
+/*  POINTS COMPLETED */
 
 function pointCheck() {
     const position = player.getBoundingClientRect();
@@ -167,61 +166,12 @@ function pointCheck() {
             position.top < pos.bottom
 
         ) {
-            points[i].parentNode.removeChild(points[i]);
+            points[i].classList.remove('point');
         }
     }
 
-   
-
 }
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* COLLISION WALLS COMPLETED */
-
-
 
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
@@ -236,4 +186,15 @@ start1.onclick = function(){
     start1.parentNode.removeChild(start1);
 }
 
-/* TITLE COMPLETED */
+/* COLOURS */
+
+
+const colors = document.querySelectorAll('li');
+
+for (let i =0 ; i < colors.length; i++) {
+    colors[i].addEventListener('click', setColor);
+}
+
+function setColor() {
+    player.style.backgroundColor = this.id;
+}
