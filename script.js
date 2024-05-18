@@ -198,3 +198,20 @@ for (let i =0 ; i < colors.length; i++) {
 function setColor() {
     player.style.backgroundColor = this.id;
 }
+
+
+/* CLOSE SIDEBAR */
+
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const main = document.getElementById("main");
+
+    if (sidebar.style.left === "0px") {
+        sidebar.style.left = "-250px";
+        main.style.marginLeft = "0";
+    } else {
+        sidebar.style.left = "0px";
+        main.style.marginLeft = "250px";
+    }
+}
+
