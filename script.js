@@ -49,6 +49,8 @@ for (let y of maze) {
 }
 
 //Player movement
+
+
 function keyUp(event) {
     if (event.key === 'ArrowUp') {
         upPressed = false;
@@ -79,30 +81,55 @@ let playerTop = 0;
 let playerLeft = 0;
 
 setInterval(function() {
-    if(downPressed) {
+    if (downPressed) {
+
+        let position = player.getBoundingClientRect()
+        let newBottom = position.bottom +1;
+
+        let btmL = document.elementFromPoint(position.left, newBottom);
+        let btmR = document.elementFromPoint(position.right, newBottom);
+
+        if (btmL.classlist.contains('wall') == false && btmR.classlist.contains('wall') == false) 
         playerTop++;
-        player.style.top = playerTop + 'px';
-        playerMouth.classList = 'down';
+         player.style.top = playerTop + 'px';
+        playerMouth.classList='down';
     }
+    
     else if(upPressed) {
         playerTop--;
         player.style.top = playerTop + 'px';
         playerMouth.classList = 'up';
     }
-    else if(leftPressed) {
-        playerLeft--;
-        player.style.left = playerLeft + 'px';
+    else if(leftPressed == true) {
+        let newLeft = position.left - 1;
+        let element = document.elementFromPoint (newLeft, position.top);
+
+        if(element.classList.contains('wall') == false) {
+            playerLeft--;
+            player.style.left = playerLeft + 'px';
+
+        }
+        
         playerMouth.classList = 'left';
     }
+
     else if(rightPressed) {
         playerLeft++;
         player.style.left = playerLeft + 'px';
         playerMouth.classList = 'right';
     }
+    
 }, 10);
+
+
+
 
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
+
+
+
+
 /* TITLE COMPLETED */
 let start1 = document.querySelector('#start1');
 
