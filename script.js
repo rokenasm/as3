@@ -181,7 +181,7 @@ let enemyBotttom = 0;
     
 }, 10);
 
-/*  POINTS COMPLETED /*    */
+
 /* Game over doesnt work 
 function gameOver(){
     let h1tag = document.querySelector('h1');
@@ -191,7 +191,7 @@ function gameOver(){
 }
   */
 
-
+/* POINTS COMPLETED */
 function pointCheck() {
     const position = player.getBoundingClientRect();
     const points = document.querySelectorAll('.point');
