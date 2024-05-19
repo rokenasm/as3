@@ -4,6 +4,7 @@ let leftPressed = false;
 let rightPressed = false;
 
 const main = document.querySelector('main');
+const start = document.querySelectorAll('.startDiv')
 
 //Player = 2, Wall = 1, Enemy = 3, Point = 0
 let maze = [
@@ -13,11 +14,28 @@ let maze = [
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 1, 1, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 1, 1, 1],
-    [1, 0, 0, 1, 0, 3, 0, 0, 0, 1],
+    [1, 0, 0, 1, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 1, 0, 1],
-    [1, 3, 1, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 0, 0, 0, 0, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
+
+/* RANDOM ENEMIES*/
+
+function randomEnemy(){
+    let row = Math.floor(Math.random()* maze.length);
+    let column = Math.floor(Math.random ()*maze[row].length);
+    while (maze[row][column]==1 || maze[row][column] ==2) {
+        row = Math.floor(Math.random() *maze.length);
+        column = Math.floor(Math.random()* maze[row].length)
+    }
+
+    maze[row][column] = 3;
+}
+randomEnemy();
+randomEnemy();
+randomEnemy();
+
 
 //Populates the maze in the HTML
 for (let y of maze) {
@@ -88,7 +106,7 @@ let enemyBotttom = 0;
 
 
 
-/* COLLISION WALLS COMPLETED*/
+/* COLLISION WALLS COMPLETED AND ENEMY*/
   setInterval(function() {
     pointCheck();
     if (downPressed == true) {
@@ -108,7 +126,6 @@ let enemyBotttom = 0;
     }
 }
 
-    
     if(upPressed == true) {
 
         let position = player.getBoundingClientRect()
@@ -230,12 +247,3 @@ for (let i =0 ; i < colors.length; i++) {
 function setColor() {
     player.style.backgroundColor = this.id;
 }
-
-
-
-
-
-
-
-
-
